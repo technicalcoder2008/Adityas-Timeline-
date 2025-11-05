@@ -207,13 +207,10 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         
-        const OPENROUTER_API_KEY = "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";
-        const OPENROUTER_MODEL = "deepseek/deepseek-r1-0528-qwen3-8b:free"; 
-        const OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions";
+        // DEKHIYE! Humne yahan se saari API keys hata di hain. Ab sab kuch safe hai.
         
         const timelineData = [ { year: -3500, title: "Invention of the Wheel", location: "Mesopotamia", era: "Ancient", description: "The invention of the wheel revolutionizes transport and pottery making." }, { year: -3200, title: "Invention of Writing", location: "Sumer", era: "Ancient", description: "The cuneiform writing system is developed, marking the beginning of recorded history." }, { year: -2560, title: "Great Pyramid of Giza", location: "Egypt", era: "Ancient", description: "Construction of the Great Pyramid, an architectural marvel, is completed." }, { year: 80, title: "Colosseum Opens", location: "Rome", era: "Classical", description: "The Colosseum opens in Rome for gladiatorial games and public spectacles." }, { year: 105, title: "Invention of Paper", location: "China", era: "Classical", description: "Cai Lun invents a paper-making process, transforming the spread of information." }, { year: 476, title: "Fall of the Roman Empire", location: "Europe", era: "Medieval", description: "The Western Roman Empire collapses, marking the beginning of the Middle Ages." }, { year: 850, title: "Discovery of Gunpowder", location: "China", era: "Medieval", description: "Alchemists in China discover gunpowder, initially for medicinal purposes, later for warfare." }, { year: 1215, title: "Magna Carta is Signed", location: "England", era: "Medieval", description: "A foundational document for constitutional law and human rights." }, { year: 1440, title: "Invention of the Printing Press", location: "Germany", era: "Renaissance", description: "Johannes Gutenberg's invention sparks an information revolution in Europe." }, { year: 1543, title: "Copernicus' Heliocentric Model", location: "Poland", era: "Renaissance", description: "Nicolaus Copernicus publishes his theory that the Earth revolves around the Sun." }, { year: 1609, title: "Galileo's Telescope Observations", location: "Italy", era: "Renaissance", description: "Galileo Galilei's observations of the cosmos provide evidence for the Copernican model." }, { year: 1687, title: "Newton's Principia Mathematica", location: "England", era: "Renaissance", description: "Isaac Newton publishes his laws of motion and universal gravitation, a cornerstone of physics." }, { year: 1712, title: "Invention of the Steam Engine", location: "England", era: "Industrial", description: "Thomas Newcomen's atmospheric steam engine paves the way for the Industrial Revolution." }, { year: 1760, title: "Industrial Revolution Begins", location: "Britain", era: "Industrial", description: "Transforms society with new manufacturing processes and technologies." }, { year: 1776, title: "American Independence", location: "USA", era: "Industrial", description: "The Declaration of Independence is signed, creating the United States." }, { year: 1783, title: "First Hot Air Balloon Flight", location: "France", era: "Industrial", description: "The Montgolfier brothers achieve the first manned, untethered flight, marking the dawn of aviation." }, { year: 1796, title: "Discovery of Vaccination", location: "England", era: "Industrial", description: "Edward Jenner develops the first vaccine, using cowpox to immunize against smallpox." }, { year: 1837, title: "Invention of the Telegraph", location: "USA", era: "Industrial", description: "Samuel Morse develops the electric telegraph, enabling long-distance communication." }, { year: 1859, title: "Darwin's \"On the Origin of Species\"", location: "England", era: "Industrial", description: "Charles Darwin publishes his theory of evolution by natural selection." }, { year: 1876, title: "Bell Patents the Telephone", location: "USA", era: "Industrial", description: "Alexander Graham Bell is granted a patent for the telephone." }, { year: 1879, title: "Edison's Light Bulb", location: "USA", era: "Industrial", description: "Thomas Edison patents a commercially viable incandescent light bulb." }, { year: 1903, title: "First Powered Flight", location: "USA", era: "Modern", description: "The Wright Brothers achieve the first successful powered and controlled airplane flight." }, { year: 1905, title: "Einstein's Theory of Relativity", location: "Switzerland", era: "Modern", description: "Albert Einstein publishes his theory of special relativity, changing our understanding of space and time." }, { year: 1926, title: "First Liquid-Fueled Rocket", location: "USA", era: "Modern", description: "Robert Goddard launches the world's first liquid-fueled rocket." }, { year: 1928, title: "Discovery of Penicillin", location: "Scotland", era: "Modern", description: "Alexander Fleming discovers penicillin, the first true antibiotic." }, { year: 1942, title: "First Controlled Nuclear Reaction", location: "USA", era: "Modern", description: "Enrico Fermi leads a team to achieve the first self-sustaining nuclear chain reaction." }, { year: 1947, title: "Invention of the Transistor", location: "USA", era: "Modern", description: "Bell Labs scientists invent the transistor, the foundation of all modern electronics." }, { year: 1953, title: "Discovery of DNA Structure", location: "England", era: "Modern", description: "Watson and Crick describe the double helix structure of DNA." }, { year: 1957, title: "Sputnik 1 Launch", location: "Soviet Union", era: "Modern", description: "The first artificial satellite is launched, initiating the Space Race." }, { year: 1961, title: "First Human in Space", location: "Soviet Union", era: "Modern", description: "Cosmonaut Yuri Gagarin becomes the first human to orbit the Earth." }, { year: 1969, title: "Apollo 11 Moon Landing", location: "USA/Moon", era: "Modern", description: "NASA's Apollo 11 mission successfully lands the first humans on the Moon." }, { year: 1981, title: "First Space Shuttle Flight", location: "USA", era: "Modern", description: "Space Shuttle Columbia (STS-1) launches, the first flight of a reusable orbital spacecraft." }, { year: 1990, title: "Hubble Telescope Deployed", location: "Space", era: "Modern", description: "The Hubble Space Telescope is deployed, revolutionizing modern astronomy." }, { year: 2021, title: "James Webb Telescope Launch", location: "Space", era: "Modern", description: "The James Webb Space Telescope is launched to observe the first galaxies." }];
         
-        // --- UPDATED AND RESTORED mapFiles OBJECT ---
         const mapFiles = {
             'Harappan Sites': { type: 'markers', key: 'Harappan', year: 'c. 2500-1900 BCE'},
             'Mauryan Empire Sites': { type: 'markers', key: 'Mauryan', year: 'c. 322-185 BCE'},
@@ -254,7 +251,6 @@
             'Tectonic Plates': { type: 'geojson', year: 'Present Day', url: 'https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json' }
         };
         
-        // --- MASSIVELY EXPANDED markerData OBJECT ---
         const markerData = {
             Harappan: { 
                 view: [28.5, 72.0], zoom: 5, 
@@ -321,7 +317,6 @@
             NationalMovement: { 
                 view: [24.0, 80.0], zoom: 5, 
                 points: [
-                    // --- ALL 112+ EVENTS MAPPED AS PER YOUR LIST ---
                     { lat: 28.984, lng: 77.706, name: 'Meerut (1857)', description: '1. The Great Revolt (First War of Independence) begins.' },
                     { lat: 28.6139, lng: 77.2090, name: 'Delhi (1858)', description: '2. Government of India Act transfers power to the British Crown.' },
                     { lat: 23.4735, lng: 88.0411, name: 'Nadia, Bengal (1859)', description: '3. Indigo Revolt (Nil Bidroha) against exploitative planters.' },
@@ -522,26 +517,12 @@
                 document.getElementById('info-modal-body').innerHTML = body;
                 infoModal.style.display = 'block';
             }
-            document.getElementById('about-btn').addEventListener('click', () => openInfoModal("About Aditya's Timeline", "<h4>Creator</h4><p>This application was created by <b>Aditya Kumar Rai</b> as a personal project to explore and visualize history in an interactive, AI-powered way.</p><h4>Technology</h4><p>This app utilizes Firebase for authentication and is powered by advanced AI models for generating historical data and analysis.</p><p><b>Version:</b> 7.0 (Master Prompt)</p>"));
+            document.getElementById('about-btn').addEventListener('click', () => openInfoModal("About Aditya's Timeline", "<h4>Creator</h4><p>This application was created by <b>Aditya Kumar Rai</b> as a personal project to explore and visualize history in an interactive, AI-powered way.</p><h4>Technology</h4><p>This app utilizes Firebase for authentication and is powered by advanced AI models for generating historical data and analysis.</p><p><b>Version:</b> 8.0 (Secure Backend)</p>"));
             document.getElementById('privacy-btn').addEventListener('click', () => openInfoModal("Privacy Policy", "<h4>Data Storage</h4><p>Your personal activity data, such as explored events, is saved directly on your device in your browser's local storage. This data is <b>never sent to our servers or any third party</b>.</p><h4>Authentication</h4><p>We use Google Firebase for secure login. We only use your email for authentication purposes and it is never shared.</p><h4>AI Queries</h4><p>All requests made to the AI for historical data are completely anonymous and do not contain any of your personal information.</p>"));
             document.getElementById('guide-btn').addEventListener('click', () => openInfoModal("User Guide", "<h4>Welcome!</h4><p>This guide will help you navigate the app.</p><ul><li><b>Timeline:</b> Browse a curated list of major historical events. Click on any event to get a deep, AI-powered analysis.</li><li><b>Compare:</b> Enter any year (e.g., '1947 AD' or '44 BC') to see a list of simultaneous global events. Click on any event for a detailed Q&A.</li><li><b>Map:</b> Explore local historical maps for different years using the timeline scrubber at the top.</li><li><b>Profile:</b> Manage your app theme and view other information.</li></ul>"));
 
-            async function callAI(prompt) {
-                const response = await fetch(OPENROUTER_API_URL, { 
-                    method: 'POST', 
-                    headers: { 
-                        'Content-Type': 'application/json', 
-                        'Authorization': `Bearer ${OPENROUTER_API_KEY}` 
-                    }, 
-                    body: JSON.stringify({ 
-                        model: OPENROUTER_MODEL, 
-                        messages: [{ "role": "user", "content": prompt }] 
-                    }) 
-                });
-                if (!response.ok) throw new Error(`API Error: ${response.statusText}`);
-                const data = await response.json();
-                return data.choices[0].message.content; 
-            }
+            // This function is no longer needed as all AI calls go through the backend
+            // async function callAI(prompt) { ... }
 
             function setupInteractiveQA(container, title, year) {
                 const qaPairs = container.querySelectorAll('.qa-pair');
@@ -559,35 +540,31 @@
                         qaPairs[currentIdx]?.classList.add('active');
                         navButton.textContent = buttonTexts[Math.floor(Math.random() * buttonTexts.length)];
                     } else {
-                        navButton.textContent = 'Summarize';
-                        navButton.onclick = () => handleSummaryClick(title, year);
+                        navButton.textContent = 'All Insights Revealed';
+                        navButton.disabled = true;
                     }
                 });
-            }
-            
-            async function handleSummaryClick(title, year) {
-                const modalBody = document.getElementById('info-modal-body');
-                openInfoModal(`Summary: ${title}`, '<div class="loader"></div>');
-                try {
-                    const prompt = `Create a concise, bullet-point summary for the historical event: "${title}" from the year ${year}. The response MUST be ONLY an HTML unordered list. It must start directly with <ul> and end with </ul>. Do not include ANY other text, markdown, or explanations.`;
-                    const rawSummary = await callAI(prompt);
-                    const summaryMatch = rawSummary.match(/<ul>[\s\S]*<\/ul>/);
-                    if (summaryMatch) {
-                        modalBody.innerHTML = summaryMatch[0];
-                    } else {
-                        throw new Error("Formatted summary not found. Raw AI response: " + rawSummary);
-                    }
-                } catch (error) { 
-                    console.error("Summary Error:", error);
-                    modalBody.innerHTML = `<p>Could not load summary. Please try again.</p>`; 
-                }
             }
             
             async function handleAIInteraction(prompt, title, year) {
                 openInfoModal(title, '<div class="loader"></div>');
                 try {
-                    const finalPrompt = `You are an HTML generator. For the event "${prompt}", create 5-7 analytical Q&A pairs. Your entire response MUST be ONLY HTML. Use the exact structure: \`<div class="qa-pair"><h4>Question...</h4><p>Answer...</p></div>\`. The first div MUST have the 'active' class: \`<div class="qa-pair active">...\`. Do not write any other text, greetings, or markdown.`;
-                    const rawDetails = await callAI(finalPrompt);
+                    // Humare naye backend function ka address
+                    const detailsFunctionUrl = 'https://us-central1-las-card.cloudfunctions.net/getEventDetails';
+
+                    const response = await fetch(detailsFunctionUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ data: { event_prompt: prompt } }) // Firebase v2 requires this 'data' wrapper
+                    });
+
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        throw new Error(`Server error: ${response.status} ${errorText}`);
+                    }
+
+                    const rawDetails = await response.text();
+                    
                     const detailsMatch = rawDetails.match(/<div class="qa-pair.*">[\s\S]*/);
                     if (detailsMatch) {
                         let htmlContent = detailsMatch[0];
@@ -597,7 +574,8 @@
                         document.getElementById('info-modal-body').innerHTML = htmlContent;
                         setupInteractiveQA(document.getElementById('info-modal-body'), title, year);
                     } else {
-                        throw new Error("Formatted HTML not found in AI response. Raw: " + rawDetails);
+                        // If AI gives a non-HTML response, show it as plain text
+                        document.getElementById('info-modal-body').innerHTML = `<p>Received an unexpected response from the AI. Please try again.</p><pre>${rawDetails}</pre>`;
                     }
                 } catch (error) { 
                     console.error("Details Error:", error);
@@ -620,8 +598,15 @@
                 }));
             }
             eraFilterButtons.forEach(button => { button.addEventListener('click', (e) => { eraFilterButtons.forEach(btn => btn.classList.remove('active')); e.currentTarget.classList.add('active'); renderTimeline(); }); });
+            
+            // =========================================================================
+            // ===== SAHI AUR FINAL CODE (BACKEND KO CALL KARNE WALA) =====
+            // =========================================================================
 
-            const searchYearInput = document.getElementById('search-year-input'), globalTimelineContainer = document.getElementById('global-timeline-container');
+            const searchYearInput = document.getElementById('search-year-input');
+            const globalTimelineContainer = document.getElementById('global-timeline-container');
+            const INITIAL_ENTITIES_TO_SHOW = 10;
+
             function parseYearString(yearStr) {
                 if (!yearStr || typeof yearStr !== 'string') return null;
                 const str = yearStr.trim().toUpperCase();
@@ -630,10 +615,13 @@
                 if (isNaN(numberPart)) return null;
                 return isBC ? -numberPart : numberPart;
             }
-            
+
             function handleYearSelection(yearStr) {
                 const year = parseYearString(yearStr);
-                if (year === null) { alert("Invalid year format. Please use '1526 AD' or '44 BC'."); return; }
+                if (year === null) {
+                    alert("Invalid year format. Please use '1526 AD' or '44 BC'.");
+                    return;
+                }
                 renderContinentSelectors(year);
                 searchYearInput.value = yearStr;
             }
@@ -669,100 +657,61 @@
                     });
                 });
             }
-
-            // =========================================================================
-            // ===== FINAL MASTER PROMPT LOGIC =====
-            // =========================================================================
             
-            const INITIAL_ENTITIES_TO_SHOW = 10;
-
             async function startFetchingContinentData(year, continent, container) {
-                container.innerHTML = '<div class="loader"></div><p style="text-align: center; color: var(--subtle-text);">Identifying historical entities...</p>';
-                
-                // --- STEP 1: The Master Prompt for a clean, accurate list ---
-                const promptStep1 = `You are an expert historian and geographer who ONLY responds in perfectly formatted JSON.
-                Your task is to generate a comprehensive, historically accurate, and clean list of all distinct political entities on the continent of **${continent}** during the year **${year}**.
-
-                To ensure accuracy, follow this internal thought process:
-                Step A (Brainstorm): Mentally list all global empires (e.g., British, French), local kingdoms, colonies, protectorates, and independent states relevant to the continent and year.
-                Step B (Filter & Verify): Review your brainstormed list. For each entity, verify: 1. Was it geographically on **${continent}**? 2. Did it exist as a distinct entity in **${year}**? REMOVE ALL that fail (e.g., remove 'Luxembourg' for Asia; remove 'Russian America' for 1916).
-                Step C (Deduplicate & Refine): Clean the list. Remove duplicates. If one entity is a clear sub-part of another, prefer the parent entity (e.g., prefer 'British Raj' over 'Madras Presidency' unless the sub-part had extreme autonomy). Use the most specific and accurate name for that year (e.g., for 1916, use 'British Raj', not 'India' or 'British Empire').
-
-                RULES FOR OUTPUT:
-                1. Your final output MUST be a single, valid JSON array of unique strings, containing the cleaned, alphabetized list from Step C.
-                2. Do NOT include your thought process, notes (like 'not part of Asia'), or any text outside the JSON array.
-                3. The response must start with '[' and end with ']'.`;
+                container.innerHTML = '<div class="loader"></div><p style="text-align: center; color: var(--subtle-text);">Contactando al historiador central...</p>';
 
                 try {
-                    const entityListContent = await callAI(promptStep1);
-                    const jsonMatch = entityListContent.match(/\[[\s\S]*\]/);
-                    if (!jsonMatch) throw new Error("Could not find a JSON array in the AI's Step 1 response.");
-                    
-                    const entityNames = JSON.parse(jsonMatch[0]);
+                    // Yeh aapke live backend server ka address hai
+                    const functionUrl = `https://us-central1-las-card.cloudfunctions.net/getHistoricEvents`;
+                    const response = await fetch(`${functionUrl}?year=${year}&continent=${continent}`);
 
-                    if (entityNames.length === 0) {
-                        container.innerHTML = '<p>No significant political entities found for this continent in the specified year.</p>';
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        throw new Error(`El servidor respondió con un error: ${errorText}`);
+                    }
+
+                    const entitiesData = await response.json(); 
+
+                    if (!entitiesData || entitiesData.length === 0) {
+                        container.innerHTML = '<p>No se encontraron entidades políticas significativas para este continente en el año especificado.</p>';
                         return;
                     }
-
-                    renderEntityPlaceholders(entityNames, container);
-
-                    // --- STEP 2: Fetch events for each entity (this part remains robust) ---
-                    for (const entityName of entityNames) {
-                        const entityContainerId = `entity-${entityName.replace(/[^a-zA-Z0-9]/g, '')}`;
-                        const entityContentContainer = container.querySelector(`#${entityContainerId} .country-content`);
-                        
-                        const promptStep2 = `You are a historian AI that ONLY responds in a single, valid JSON object. For the historical entity "${entityName}" in the year ${year}, provide its events.
-                        
-                        RULES:
-                        1. Your response MUST be a valid JSON object with two keys: "representative_modern_code" and "events".
-                        2. "representative_modern_code": The 2-letter ISO code for a flag icon (e.g., "in" for "British Raj"). This is mandatory.
-                        3. "events": An array of strings with significant events for that year.
-                        4. CRITICAL: If no events are found, you MUST return a valid JSON object with an empty events array. Example: {"representative_modern_code": "np", "events": []}. DO NOT send text explanations.
-                        5. Your response MUST start with '{' and end with '}'. No other text.`;
-
-                        // We add a small delay to avoid hitting API rate limits too quickly
-                        await new Promise(resolve => setTimeout(resolve, 100));
-
-                        try {
-                            const eventDetailsContent = await callAI(promptStep2);
-                            const eventJsonMatch = eventDetailsContent.match(/\{[\s\S]*\}/);
-                            if (!eventJsonMatch) throw new Error(`No valid JSON object received for ${entityName}`);
-                            
-                            const eventData = JSON.parse(eventJsonMatch[0]);
-                            updateEntityUI(entityContainerId, eventData, container);
-                        } catch (error) {
-                            console.error(`Error in Step 2 for ${entityName}:`, error, "Raw response:", eventDetailsContent);
-                            if (entityContentContainer) {
-                                entityContentContainer.innerHTML = `<p class="event-placeholder">Could not load events.</p>`;
-                            }
-                        }
-                    }
+                    
+                    renderAllEntities(entitiesData, container);
 
                 } catch (error) {
-                    console.error("Error in Step 1 (fetching entity list):", error, "Raw response:", entityListContent);
-                    container.innerHTML = `<p>Could not fetch the list of historical entities for ${continent} in ${year}. The AI may have provided an incorrectly formatted response.</p>`;
+                    console.error("Error al obtener datos históricos desde el backend:", error);
+                    container.innerHTML = `<p>No se pudieron cargar los datos para ${continent} en ${year}. Por favor, inténtalo de nuevo.</p>`;
                 }
             }
 
-            function renderEntityPlaceholders(entityNames, container) {
-                let htmlContent = entityNames.map((name, index) => {
-                    const uniqueId = `entity-${name.replace(/[^a-zA-Z0-9]/g, '')}`;
+            function renderAllEntities(entitiesData, container) {
+                let htmlContent = entitiesData.map((entity, index) => {
+                    const uniqueId = `entity-${(entity.name || 'unknown').replace(/[^a-zA-Z0-9]/g, '')}`;
                     const isHidden = index >= INITIAL_ENTITIES_TO_SHOW;
+                    
+                    let eventsHtml = '';
+                    if (entity.events && entity.events.length > 0) {
+                        eventsHtml = `<ul>${entity.events.map(event => `<li><a href="#" class="clickable-event" data-event-text="${(event || '').replace(/"/g, '&quot;')}">${event}</a></li>`).join('')}</ul>`;
+                    } else {
+                        eventsHtml = `<p class="event-placeholder">No se registraron eventos significativos para este año.</p>`;
+                    }
+
                     return `
                     <div class="country-timeline" id="${uniqueId}" ${isHidden ? 'style="display:none;"' : ''}>
                         <div class="country-header">
-                            <img src="" alt="" class="flag-placeholder">
-                            <span>${name}</span>
+                            <img src="https://flagcdn.com/w40/${(entity.representative_modern_code || 'xx').toLowerCase()}.png" alt="${entity.representative_modern_code}">
+                            <span>${entity.name}</span>
                         </div>
                         <div class="country-content">
-                            <div class="event-placeholder">Loading events... <div class="small-loader"></div></div>
+                            ${eventsHtml}
                         </div>
                     </div>`;
                 }).join('');
 
-                if (entityNames.length > INITIAL_ENTITIES_TO_SHOW) {
-                    htmlContent += `<button class="show-more-btn">Show ${entityNames.length - INITIAL_ENTITIES_TO_SHOW} More</button>`;
+                if (entitiesData.length > INITIAL_ENTITIES_TO_SHOW) {
+                    htmlContent += `<button class="show-more-btn">Mostrar ${entitiesData.length - INITIAL_ENTITIES_TO_SHOW} más</button>`;
                 }
 
                 container.innerHTML = htmlContent;
@@ -777,29 +726,7 @@
                     };
                 }
             }
-
-            function updateEntityUI(containerId, data, mainContainer) {
-                const entityContainer = mainContainer.querySelector(`#${containerId}`);
-                if (!entityContainer) return;
-
-                const flagImg = entityContainer.querySelector('.flag-placeholder');
-                if (flagImg && data.representative_modern_code) {
-                    flagImg.src = `https://flagcdn.com/w40/${data.representative_modern_code.toLowerCase()}.png`;
-                    flagImg.alt = data.representative_modern_code;
-                }
-
-                const contentDiv = entityContainer.querySelector('.country-content');
-                if (data.events && data.events.length > 0) {
-                    contentDiv.innerHTML = `<ul>${data.events.map(event => `<li><a href="#" class="clickable-event" data-event-text="${(event || '').replace(/"/g, '&quot;')}">${event}</a></li>`).join('')}</ul>`;
-                } else {
-                    contentDiv.innerHTML = `<p class="event-placeholder">No significant events recorded for this year.</p>`;
-                }
-            }
-            // =========================================================================
-            // ===== END OF FINAL LOGIC =====
-            // =========================================================================
-
-
+            
             globalTimelineContainer.addEventListener('click', (e) => {
                 if (e.target && e.target.classList.contains('clickable-event')) {
                     e.preventDefault();
@@ -1042,3 +969,5 @@
     </script>
 </body>
 </html>
+
+
